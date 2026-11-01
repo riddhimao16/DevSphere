@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DevSphere – Build. Learn. Belong.</title>
+<meta name="description" content="DevSphere is a student-led, GDG-inspired developer community in Gorakhpur, India. A fictional concept, not affiliated with Google.">
+<meta name="theme-color" content="#F8FAFF" id="tc">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%234285F4'/%3E%3Ccircle cx='22' cy='10' r='5' fill='%23FBBC05'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<script>/* set theme before first paint to avoid a flash */
+(function(){try{var t=localStorage.getItem('ds-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+<style>
+:root{--bg:#F8FAFF;--surface:#fff;--text:#172033;--muted:#4a5568;--line:#dde4f3;--blue:#4285F4;--red:#EA4335;--yellow:#FBBC05;--green:#34A853;--link:#1a57c9;--shadow:0 10px 30px -14px rgba(23,32,51,.22);--hf:'Space Grotesk',system-ui,sans-serif;--bf:'DM Sans',system-ui,sans-serif;color-scheme:light}
+:root[data-theme="dark"]{--bg:#0D1424;--surface:#151e33;--text:#eaf0ff;--muted:#aab6d3;--line:#26324f;--link:#8ab4f8;--shadow:0 10px 30px -14px rgba(0,0,0,.7);color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0D1424;--surface:#151e33;--text:#eaf0ff;--muted:#aab6d3;--line:#26324f;--link:#8ab4f8;--shadow:0 10px 30px -14px rgba(0,0,0,.7);color-scheme:dark}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1.05rem/1.65 var(--bf);transition:background .25s,color .25s}
+h1,h2,h3{font-family:var(--hf);line-height:1.1;margin:0 0 .6em;letter-spacing:-.02em}
+h1{font-size:clamp(2.6rem,7vw,4.6rem)}h2{font-size:clamp(1.9rem,4vw,2.7rem)}h3{font-size:1.2rem;letter-spacing:-.01em}
+p{margin:0 0 1em;max-width:62ch}a{color:var(--link)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1120px,100% - 2.5rem);margin-inline:auto}section{padding:5rem 0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:0;background:var(--text);color:var(--bg);padding:.6rem 1rem;z-index:100}.skip:focus{left:1rem;top:1rem}
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--blue),var(--red),var(--yellow),var(--green));z-index:80}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font:700 1rem var(--bf);padding:.8rem 1.4rem;border-radius:999px;border:2px solid var(--blue);background:var(--blue);color:#fff;text-decoration:none;cursor:pointer;transition:transform .15s,box-shadow .15s,border-color .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px -8px var(--blue)}
+.btn.ghost{background:transparent;color:var(--text);border-color:var(--line)}.btn.ghost:hover{border-color:var(--blue);box-shadow:none}
+.btn.sm{padding:.5rem 1rem;font-size:.92rem}
+header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:1rem}
+.brand{display:flex;align-items:center;gap:.6rem;font:700 1.3rem var(--hf);color:var(--text);text-decoration:none}
+.nav ul{display:flex;gap:1.6rem;list-style:none;margin:0;padding:0}
+.nav ul a{color:var(--text);text-decoration:none;font-weight:500;padding:.3rem 0;border-bottom:2px solid transparent}
+.nav ul a:hover,.nav ul a[aria-current="true"]{border-color:var(--blue)}
+.tools{display:flex;align-items:center;gap:.6rem}
+.icon-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--text);cursor:pointer;display:grid;place-items:center;font-size:1.1rem;transition:border-color .15s}.icon-btn:hover{border-color:var(--blue)}
+.menu-btn,.nav li.m{display:none}
+@media(max-width:860px){.menu-btn{display:grid}.nav .btn.join{display:none}.nav li.m{display:block}
+.nav ul{position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:var(--surface);border-bottom:1px solid var(--line);padding:.5rem 1.25rem 1rem;display:none}
+.nav ul.open{display:flex}.nav ul a{display:block;padding:.8rem 0}}
+.hero{padding:4rem 0 5rem}.hero .wrap{display:grid;gap:3rem;align-items:center}
+@media(min-width:900px){.hero .wrap{grid-template-columns:1.05fr .95fr}}
+.lead{font-size:1.2rem;color:var(--muted)}.cta-row{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.6rem}
+.tag-line{display:inline-block;color:var(--muted);margin-bottom:1rem}
+.next{margin-top:2rem;display:flex;flex-wrap:wrap;gap:1rem 1.5rem;align-items:center;padding:1rem 1.2rem}
+.next h3{margin:0;font-size:1.05rem}.next small{color:var(--muted)}
+.cd{display:flex;gap:.7rem;margin-left:auto}.cd div{text-align:center;min-width:46px}.cd b{display:block;font:700 1.5rem var(--hf)}.cd span{font-size:.75rem;color:var(--muted)}
+.art{width:100%;height:auto;filter:drop-shadow(var(--shadow))}.orbit{transform-origin:260px 220px;animation:spin 40s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}.caret{animation:blink 1.1s steps(2) infinite}@keyframes blink{50%{opacity:0}}
+.about-grid{display:grid;gap:2.5rem}@media(min-width:900px){.about-grid{grid-template-columns:1fr 1fr}}
+.mv{display:grid;gap:1rem;margin-top:1.5rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:1.5rem;box-shadow:var(--shadow)}
+.card h3{margin-bottom:.4rem}.card p{margin:0;color:var(--muted)}
+.benefit{display:flex;gap:1rem}.dot{flex:none;width:14px;height:14px;border-radius:50%;margin-top:.45rem}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:3rem}@media(min-width:760px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{border-top:4px solid var(--c);padding-top:.8rem}.stat b{display:block;font:700 2.6rem var(--hf)}.stat span{color:var(--muted)}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:1.4rem}
+.filters{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{font:500 .95rem var(--bf);padding:.5rem 1.1rem;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--text);cursor:pointer}
+.chip:hover{border-color:var(--blue)}.chip[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.tools2{display:flex;flex-wrap:wrap;gap:.8rem 1rem;align-items:center;margin-bottom:1.2rem}
+input[type=search],input[type=email],input[type=text]{font:inherit;padding:.65rem .9rem;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--text);min-width:0}
+input[type=search]{flex:1;max-width:340px}
+.count{color:var(--muted);margin:0}
+.grid{display:grid;gap:1.4rem;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+.proj{padding:0;overflow:hidden;transition:transform .2s,box-shadow .2s}.proj:hover,.proj:focus-within{transform:translateY(-4px);border-color:var(--blue)}
+.thumb{display:block;width:100%;height:150px}.body{padding:1.3rem}.card[hidden]{display:none}
+.cat{font-size:.85rem;font-weight:700;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;list-style:none;padding:0;margin:.8rem 0 1rem}
+.tags li{font-size:.82rem;padding:.2rem .65rem;border-radius:8px;background:color-mix(in srgb,var(--blue) 16%,transparent)}
+.empty{text-align:center;padding:2.5rem 1rem;color:var(--muted)}
+.ev{display:flex;flex-direction:column;gap:.4rem;transition:transform .2s}.ev:hover,.ev:focus-within{transform:translateY(-4px);border-color:var(--blue)}
+.date{display:flex;gap:.9rem;align-items:center;margin-bottom:.6rem}
+.dbox{width:64px;text-align:center;border-radius:14px;padding:.4rem 0;background:var(--c);color:#172033;font-family:var(--hf);line-height:1.1}
+.dbox b{display:block;font-size:1.6rem}.dbox span{font-size:.8rem;font-weight:700}
+.meta{color:var(--muted);font-size:.95rem}.ev p{flex:1}.acts{display:flex;gap:.6rem;flex-wrap:wrap}
+details{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1rem 1.3rem;margin-bottom:.8rem}
+summary{cursor:pointer;font:700 1.05rem var(--hf);list-style:none;display:flex;justify-content:space-between;gap:1rem}
+summary::-webkit-details-marker{display:none}summary::after{content:"+";font-size:1.4rem;line-height:1;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}details p{margin:.8rem 0 0;color:var(--muted)}
+.cta{background:#0D1424;color:#eaf0ff;border-radius:28px;padding:3.5rem 2rem;text-align:center;position:relative;overflow:hidden;border:1px solid var(--line)}
+.cta p{margin-inline:auto;color:#aab6d3}.cta .cta-row{justify-content:center}.cta .btn.ghost{color:#eaf0ff;border-color:#3a4766}
+.cta::before{content:"";position:absolute;inset:auto 0 0 0;height:6px;background:linear-gradient(90deg,var(--blue) 25%,var(--red) 25% 50%,var(--yellow) 50% 75%,var(--green) 75%)}
+.follow{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin:1.8rem auto 0;max-width:520px}
+.follow input{flex:1;min-width:200px;background:#151e33;border-color:#3a4766;color:#eaf0ff}.follow-msg{min-height:1.4em;margin:.6rem auto 0;font-size:.92rem}
+footer{border-top:1px solid var(--line);padding:3.5rem 0 2rem;margin-top:3rem}
+.fgrid{display:grid;gap:2rem}@media(min-width:800px){.fgrid{grid-template-columns:1.6fr 1fr 1fr 1.2fr}}
+footer h3{font-size:1rem}footer ul{list-style:none;padding:0;margin:0}footer li{margin-bottom:.4rem}footer a{color:var(--text)}
+.small{font-size:.88rem;color:var(--muted);margin-top:2rem;max-width:none}
+dialog{border:1px solid var(--line);border-radius:20px;background:var(--surface);color:var(--text);padding:1.8rem;width:min(460px,92vw)}
+dialog::backdrop{background:rgba(13,20,36,.6)}dialog input{width:100%}
+label{display:block;font-weight:700;margin:1rem 0 .3rem}
+.dlg-actions{display:flex;gap:.6rem;margin-top:1.3rem;justify-content:flex-end;flex-wrap:wrap}
+.otp{letter-spacing:.45em;font:700 1.6rem var(--hf);text-align:center}.hint{font-size:.9rem;color:var(--muted);margin:.4rem 0 0;max-width:none}
+.err{color:#d93025;font-size:.9rem;min-height:1.3em;margin:.3rem 0 0}:root[data-theme="dark"] .err{color:#ff8a80}
+.toast{position:fixed;bottom:1.2rem;left:50%;transform:translate(-50%,140px);background:var(--text);color:var(--bg);padding:.8rem 1.3rem;border-radius:999px;transition:transform .3s;z-index:90;max-width:92vw}.toast.show{transform:translate(-50%,0)}
+#top{position:fixed;right:1.2rem;bottom:1.2rem;z-index:60;opacity:0;pointer-events:none;transition:opacity .2s}#top.show{opacity:1;pointer-events:auto}
+.rv{opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a><div id="bar" aria-hidden="true"></div>
+<header>
+ <div class="wrap nav">
+  <a class="brand" href="#home" aria-label="DevSphere home">
+   <svg width="34" height="34" viewBox="0 0 34 34" role="img" aria-label="DevSphere logo: a blue ring with red, yellow and green dots"><circle cx="17" cy="17" r="15" fill="none" stroke="#4285F4" stroke-width="3"/><circle cx="17" cy="2" r="4" fill="#EA4335"/><circle cx="30" cy="22" r="4" fill="#FBBC05"/><circle cx="8" cy="28" r="4" fill="#34A853"/></svg>DevSphere</a>
+  <nav aria-label="Primary">
+   <ul id="menu">
+    <li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#projects">Projects</a></li><li><a href="#events">Events</a></li><li><a href="#contact">Contact</a></li>
+    <li class="m"><button class="btn sm" data-join>Join Community</button></li>
+   </ul>
+  </nav>
+  <div class="tools">
+   <button class="icon-btn" id="snd" type="button" aria-pressed="true" aria-label="Mute click sounds"><span aria-hidden="true" id="sndIcon">🔊</span></button>
+   <button class="icon-btn" id="theme" type="button" aria-pressed="false" aria-label="Dark mode"><span aria-hidden="true" id="themeIcon">☾</span></button>
+   <button class="btn sm join" data-join>Join Community</button>
+   <button class="icon-btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span aria-hidden="true" id="menuIcon">☰</span></button>
+  </div>
+ </div>
+</header>
+
+<main id="main">
+<section class="hero" id="home">
+ <div class="wrap">
+  <div>
+   <span class="tag-line">Student-led developer community in Gorakhpur, India</span>
+   <h1>Ideas are just the beginning.</h1>
+   <p class="lead">DevSphere is where students, developers, and designers turn a rough idea into something that ships. Build with a team, learn from people one step ahead, and belong from your first meetup.</p>
+   <div class="cta-row"><button class="btn" data-join>Join the Community</button><a class="btn ghost" href="#events">Explore Events</a></div>
+   <div class="card next" id="next" hidden>
+    <div><small>Next event</small><h3 id="nextTitle"></h3></div>
+    <div class="cd" id="cd" role="timer" aria-label="Time until next event"></div>
+   </div>
+  </div>
+  <svg class="art" viewBox="0 0 520 440" role="img" aria-label="Illustration of a code editor window with four colored community nodes orbiting around it">
+   <g class="orbit" fill="none" stroke="var(--line)" stroke-width="2"><circle cx="260" cy="220" r="200" stroke-dasharray="4 8"/>
+    <circle cx="260" cy="20" r="16" fill="#4285F4" stroke="none"/><circle cx="460" cy="220" r="16" fill="#EA4335" stroke="none"/><circle cx="260" cy="420" r="16" fill="#FBBC05" stroke="none"/><circle cx="60" cy="220" r="16" fill="#34A853" stroke="none"/></g>
+   <rect x="110" y="110" width="300" height="220" rx="18" fill="#0D1424"/>
+   <circle cx="136" cy="134" r="6" fill="#EA4335"/><circle cx="156" cy="134" r="6" fill="#FBBC05"/><circle cx="176" cy="134" r="6" fill="#34A853"/>
+   <g font-family="DM Sans,monospace" font-size="15"><text x="132" y="184" fill="#8ab4f8">const</text><text x="182" y="184" fill="#eaf0ff">idea = </text><text x="240" y="184" fill="#fdd663">"hello"</text>
+   <text x="132" y="214" fill="#8ab4f8">team</text><text x="168" y="214" fill="#eaf0ff">.build(idea)</text>
+   <text x="132" y="244" fill="#81c995">// ship it together</text><text x="132" y="274" fill="#eaf0ff">deploy();</text><rect class="caret" x="204" y="260" width="8" height="18" fill="#4285F4"/></g>
+  </svg>
+ </div>
+</section>
+
+<section id="about" class="rv">
+ <div class="wrap">
+  <div class="about-grid">
+   <div>
+    <h2>A community that builds things, together.</h2>
+    <p>DevSphere started as a small group of friends sharing laptops after class. Today it is a student-led, GDG-inspired community for developers, designers, and curious technology enthusiasts. You don't need experience to join. You need curiosity.</p>
+    <div class="mv">
+     <div class="card"><h3>Mission</h3><p>Help every student in Gorakhpur build real projects, learn in public, and find people to grow with.</p></div>
+     <div class="card"><h3>Vision</h3><p>A city where a good idea never stalls for lack of a team, a mentor, or a place to try it.</p></div>
+    </div>
+   </div>
+   <div style="display:grid;gap:1rem;align-content:start">
+    <div class="card benefit"><span class="dot" style="background:var(--blue)"></span><div><h3>Build with a team</h3><p>Join a project squad, pair on features, and ship work you can show in a portfolio.</p></div></div>
+    <div class="card benefit"><span class="dot" style="background:var(--red)"></span><div><h3>Learn from peers and mentors</h3><p>Hands-on workshops and talks led by students and local engineers.</p></div></div>
+    <div class="card benefit"><span class="dot" style="background:var(--yellow)"></span><div><h3>Find your people</h3><p>Weekly meetups, study circles, and build nights that make tech feel less lonely.</p></div></div>
+    <div class="card benefit"><span class="dot" style="background:var(--green)"></span><div><h3>Get career-ready</h3><p>Practice demos, code reviews, and interview prep with friendly feedback.</p></div></div>
+   </div>
+  </div>
+  <div class="stats" aria-label="Community statistics">
+   <div class="stat" style="--c:var(--blue)"><b data-count="450" data-suffix="+">450+</b><span>Members</span></div>
+   <div class="stat" style="--c:var(--red)"><b data-count="32">32</b><span>Events hosted</span></div>
+   <div class="stat" style="--c:var(--yellow)"><b data-count="18">18</b><span>Projects shipped</span></div>
+   <div class="stat" style="--c:var(--green)"><b data-count="12">12</b><span>Mentors</span></div>
+  </div>
+ </div>
+</section>
+
+<section id="projects" class="rv">
+ <div class="wrap">
+  <div class="head"><div><h2>Our Projects</h2><p style="margin:0">Built by members, open to new contributors.</p></div>
+   <div class="filters" role="group" aria-label="Filter projects by category">
+    <button class="chip" aria-pressed="true" data-f="All">All</button><button class="chip" aria-pressed="false" data-f="AI / ML">AI / ML</button><button class="chip" aria-pressed="false" data-f="Web">Web</button><button class="chip" aria-pressed="false" data-f="IoT">IoT</button>
+   </div></div>
+  <div class="tools2"><label class="sr" for="q">Search projects</label><input id="q" type="search" placeholder="Search by name or technology"><p class="count" id="count" role="status" aria-live="polite"></p></div>
+  <div class="grid" id="projGrid"></div>
+  <div class="empty" id="empty" hidden><p style="margin:0 auto 1rem">No projects match your search.</p><button class="btn ghost sm" id="reset">Clear filters</button></div>
+ </div>
+</section>
+
+<section id="events" class="rv">
+ <div class="wrap">
+  <div class="head"><div><h2>Upcoming Events</h2><p style="margin:0">Free for members. Seats are limited, so register early.</p></div>
+   <div class="filters" role="group" aria-label="Filter events by type">
+    <button class="chip" aria-pressed="true" data-e="All">All</button><button class="chip" aria-pressed="false" data-e="Workshop">Workshops</button><button class="chip" aria-pressed="false" data-e="Meetup">Meetups</button><button class="chip" aria-pressed="false" data-e="Talk">Talks</button>
+   </div></div>
+  <div class="grid" id="evGrid"></div>
+ </div>
+</section>
+
+<section id="faq" class="rv">
+ <div class="wrap" style="max-width:780px">
+  <h2>Questions, answered</h2>
+  <details><summary>Do I need coding experience to join?</summary><p>No. Many members started with zero experience. Workshops are paced for beginners, and project squads include roles for designers and writers too.</p></details>
+  <details><summary>Does it cost anything?</summary><p>Membership and all events listed here are free in this concept.</p></details>
+  <details><summary>Is DevSphere an official Google Developer Group?</summary><p>No. DevSphere is a fictional, GDG-inspired community concept and is not affiliated with or endorsed by Google.</p></details>
+  <details><summary>Can I propose my own project?</summary><p>Yes. Pitch it at any Build Night. If at least three members want to work on it, we'll form a squad.</p></details>
+ </div>
+</section>
+
+<section id="join" style="padding-top:1rem">
+ <div class="wrap"><div class="cta">
+  <h2>Your next project needs a team.</h2>
+  <p>Join DevSphere, pick an event, or follow along by email. It takes under a minute.</p>
+  <div class="cta-row"><button class="btn" data-join>Join the Community</button><a class="btn ghost" href="#events">Attend an Event</a></div>
+  <form class="follow" id="follow" novalidate><label class="sr" for="fe">Email for updates</label><input id="fe" type="email" placeholder="you@example.com" autocomplete="email"><button class="btn" type="submit">Follow updates</button></form>
+  <p class="follow-msg" id="fmsg" role="status" aria-live="polite"></p>
+ </div></div>
+</section>
+</main>
+
+<footer id="contact">
+ <div class="wrap">
+  <div class="fgrid">
+   <div><a class="brand" href="#home">DevSphere</a><p style="margin-top:.8rem">Build. Learn. Belong. A student-led, GDG-inspired community in Gorakhpur, India.</p></div>
+   <div><h3>Quick links</h3><ul><li><a href="#about">About</a></li><li><a href="#projects">Projects</a></li><li><a href="#events">Events</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+   <div><h3>Social (demo links)</h3><ul><li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://x.com/" target="_blank" rel="noopener">X</a></li></ul></div>
+   <div><h3>Contact</h3><p style="margin:0"><a href="mailto:hello@devsphere.community">hello@devsphere.community</a><br>Gorakhpur, India</p><p style="margin:.6rem 0 0"><button class="btn ghost sm" id="copy">Copy email</button></p><p class="small" style="margin-top:.6rem">Demo address for a fictional community.</p></div>
+  </div>
+  <p class="small">© 2026 DevSphere. A fictional community concept. Not an official Google Developer Group and not affiliated with Google.</p>
+ </div>
+</footer>
+<button class="icon-btn" id="top" aria-label="Back to top"><span aria-hidden="true">↑</span></button>
+
+<dialog id="dlg" aria-labelledby="dlgTitle">
+ <h2 id="dlgTitle" style="font-size:1.5rem">Join DevSphere</h2>
+ <p id="dlgSub" style="color:var(--muted)"></p>
+ <div id="s1">
+  <label for="nm">Name</label><input id="nm" type="text" autocomplete="name">
+  <label for="em">Email</label><input id="em" type="email" autocomplete="email">
+  <p class="err" id="err" role="alert"></p>
+  <div class="dlg-actions"><button class="btn ghost sm" id="cancel">Cancel</button><button class="btn sm" id="ok">Send code</button></div>
+ </div>
+ <div id="s2" hidden>
+  <p id="otpMsg" style="margin:0 0 .4rem"></p>
+  <label for="otp">6-digit code</label>
+  <input id="otp" class="otp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" aria-describedby="demoHint">
+  <p class="err" id="err2" role="alert"></p><p class="hint" id="demoHint"></p>
+  <div class="dlg-actions"><button class="btn ghost sm" id="change">Change email</button><button class="btn ghost sm" id="resend">Resend code</button><button class="btn sm" id="verify">Verify and confirm</button></div>
+ </div>
+</dialog>
+<dialog id="info" aria-labelledby="infoTitle">
+ <h2 id="infoTitle" style="font-size:1.5rem"></h2><div id="infoBody"></div>
+ <div class="dlg-actions" id="infoActs"></div>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* ---------- theme ---------- */
+const root=document.documentElement,tbtn=$('#theme');
+const dark=()=>root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+function paintTheme(){const d=dark();$('#themeIcon').textContent=d?'☀':'☾';tbtn.setAttribute('aria-pressed',d);tbtn.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');$('#tc').content=d?'#0D1424':'#F8FAFF'}
+tbtn.onclick=()=>{const n=dark()?'light':'dark';root.dataset.theme=n;store.set('ds-theme',n);paintTheme();toast((n==='dark'?'Dark':'Light')+' mode on')};
+matchMedia('(prefers-color-scheme:dark)').addEventListener('change',()=>{if(!store.get('ds-theme'))paintTheme()});paintTheme();
+
+/* ---------- toast ---------- */
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),3200)}
+
+/* ---------- soft block sounds (synthesized with Web Audio, no files) ---------- */
+const snd={on:store.get('ds-sound')!=='off',ctx:null,out:null};
+function ac(){if(!snd.ctx){const C=window.AudioContext||window.webkitAudioContext;if(!C)return null;snd.ctx=new C();
+ const lp=snd.ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=5200;const m=snd.ctx.createGain();m.gain.value=.7;lp.connect(m);m.connect(snd.ctx.destination);snd.out=lp}
+ if(snd.ctx.state==='suspended')snd.ctx.resume();return snd.ctx}
+function ping(c,t,f0,f1,dur,g,type){const o=c.createOscillator(),v=c.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(f1,t+dur);
+ v.gain.setValueAtTime(0.0001,t);v.gain.linearRampToValueAtTime(g,t+.004);v.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(v);v.connect(snd.out);o.start(t);o.stop(t+dur+.02)}
+function puff(c,t,dur,f,g){const n=Math.floor(c.sampleRate*dur),b=c.createBuffer(1,n,c.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,3);
+ const s=c.createBufferSource();s.buffer=b;const lp=c.createBiquadFilter();lp.type='lowpass';lp.frequency.value=f;const v=c.createGain();v.gain.value=g;s.connect(lp);lp.connect(v);v.connect(snd.out);s.start(t)}
+const PENT=[523.25,587.33,659.25,783.99,880];
+function sfx(k){if(!snd.on)return;try{const c=ac();if(!c)return;const t=c.currentTime,r=.97+Math.random()*.06;
+ if(k==='tick'){const f=PENT[Math.floor(Math.random()*PENT.length)];ping(c,t,f,f*.99,.16,.16);ping(c,t,f*2,f*2,.07,.04)}
+ else if(k==='win'){[523.25,659.25,783.99,1046.5].forEach((f,i)=>{ping(c,t+i*.09,f,f*.99,.34,.14);ping(c,t+i*.09,f*2,f*2,.12,.04,'triangle')})}
+ else if(k==='err'){ping(c,t,233,175,.14,.16);ping(c,t+.12,208,156,.2,.16)}
+ else{ping(c,t,820*r,470*r,.07,.2);ping(c,t,1640*r,1100*r,.03,.04);puff(c,t,.012,2800,.07)}}catch(e){}}
+function paintSnd(){const b=$('#snd');$('#sndIcon').textContent=snd.on?'🔊':'🔇';b.setAttribute('aria-pressed',snd.on);b.setAttribute('aria-label',snd.on?'Mute click sounds':'Turn on click sounds')}
+$('#snd').onclick=()=>{snd.on=!snd.on;store.set('ds-sound',snd.on?'on':'off');paintSnd();if(snd.on)sfx('snap');toast(snd.on?'Click sounds on':'Click sounds off')};paintSnd();
+document.addEventListener('click',e=>{const el=e.target.closest('button,a[href],summary');if(!el||el.disabled||el.id==='snd')return;sfx(el.classList.contains('chip')?'tick':'snap')});
+
+/* ---------- mobile menu ---------- */
+const mb=$('#menuBtn'),menu=$('#menu');
+function setMenu(o){menu.classList.toggle('open',o);mb.setAttribute('aria-expanded',o);mb.setAttribute('aria-label',o?'Close menu':'Open menu');$('#menuIcon').textContent=o?'✕':'☰'}
+mb.onclick=()=>setMenu(!menu.classList.contains('open'));
+menu.addEventListener('click',e=>{if(e.target.closest('a,button'))setMenu(false)});
+document.addEventListener('click',e=>{if(menu.classList.contains('open')&&!e.target.closest('header'))setMenu(false)});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.classList.contains('open')){setMenu(false);mb.focus()}});
+addEventListener('resize',()=>{if(innerWidth>860)setMenu(false)});
+
+/* ---------- data ---------- */
+const th={'AI / ML':(c)=>`<circle cx="60" cy="75" r="9" fill="${c}"/><circle cx="150" cy="40" r="9" fill="${c}"/><circle cx="150" cy="110" r="9" fill="${c}"/><circle cx="240" cy="75" r="9" fill="${c}"/><path d="M60 75L150 40L240 75M60 75L150 110L240 75M150 40V110" stroke="${c}" stroke-width="3" fill="none"/>`,
+'Web':(c)=>`<rect x="50" y="25" width="200" height="100" rx="10" fill="none" stroke="${c}" stroke-width="4"/><path d="M50 52H250" stroke="${c}" stroke-width="4"/><rect x="70" y="68" width="70" height="40" rx="6" fill="${c}"/><path d="M158 72H228M158 90H210M158 108H222" stroke="${c}" stroke-width="5" stroke-linecap="round"/>`,
+'IoT':(c)=>`<rect x="115" y="45" width="70" height="60" rx="8" fill="${c}"/><path d="M130 45V28M150 45V28M170 45V28M130 105V122M150 105V122M170 105V122M115 65H98M115 85H98M185 65H202M185 85H202" stroke="${c}" stroke-width="5" stroke-linecap="round"/><path d="M215 40q25 35 0 70M232 28q40 47 0 94" stroke="${c}" stroke-width="3" fill="none"/>`};
+const col={'AI / ML':'#4285F4','Web':'#EA4335','IoT':'#34A853'};
+const thumbAlt={'AI / ML':'connected neural network nodes','Web':'a browser window layout','IoT':'a microcontroller chip with sensor signals'};
+const projects=[
+['CropSense AI','AI / ML',['Python','Machine Learning'],'Spots crop disease from leaf photos so farmers get advice early.','Trained on thousands of leaf images, CropSense AI flags likely diseases and suggests next steps in plain language. Next up: a Hindi-language interface.'],
+['OpenCampus','Web',['React','Firebase'],'A shared campus board for clubs, notes, and lost-and-found.','OpenCampus gives every club one place to post events and resources. Contributors are working on notifications and a mobile layout.'],
+['Orbitra CubeSat','IoT',['ESP32','Sensors'],'A student-built satellite model that logs temperature and pressure.','A ground-testable CubeSat model with ESP32 telemetry. The team is adding a live dashboard for sensor readings.'],
+['Khet Data Trust','Web',['HTML','CSS','JavaScript'],'A simple dashboard that shows farmers where their data goes.','Khet Data Trust explains data sharing in plain visuals. Good first project for HTML, CSS and JavaScript beginners.'],
+['StudyBuddy','AI / ML',['Python','LLMs'],'A study partner that quizzes you from your own class notes.','Paste your notes and StudyBuddy builds practice questions and explains the answers. Contributors are tuning prompts and evaluation.'],
+['AirAware','IoT',['Arduino','Sensors'],'Low-cost air quality monitors for classrooms and hostels.','Arduino-based monitors that track air quality and display a simple good/ok/poor signal. Looking for help with enclosure design.']];
+const pg=$('#projGrid');
+pg.innerHTML=projects.map(([t,c,tech,d],i)=>`<article class="card proj" data-i="${i}" data-cat="${c}" data-s="${esc((t+' '+tech.join(' ')+' '+d).toLowerCase())}">
+<svg class="thumb" viewBox="0 0 300 150" role="img" aria-label="${esc(t)} thumbnail: ${thumbAlt[c]}" preserveAspectRatio="xMidYMid slice"><rect width="300" height="150" style="fill:color-mix(in srgb,${col[c]} 16%,var(--surface))"/>${th[c](col[c])}</svg>
+<div class="body"><span class="cat">${c}</span><h3>${esc(t)}</h3><p>${esc(d)}</p><ul class="tags" aria-label="Technologies">${tech.map(x=>`<li>${x}</li>`).join('')}</ul><button class="btn ghost sm" data-proj="${i}" aria-label="View details for ${esc(t)}">View details</button></div></article>`).join('');
+let cat='All';
+function filterP(){const q=$('#q').value.trim().toLowerCase();let n=0;
+ $$('.proj',pg).forEach(p=>{const s=(cat==='All'||p.dataset.cat===cat)&&(!q||p.dataset.s.includes(q));p.hidden=!s;if(s)n++});
+ $('#count').textContent=`Showing ${n} of ${projects.length} projects`;$('#empty').hidden=n>0}
+$$('[data-f]').forEach(b=>b.onclick=()=>{cat=b.dataset.f;$$('[data-f]').forEach(x=>x.setAttribute('aria-pressed',x===b));filterP()});
+$('#q').addEventListener('input',filterP);
+$('#reset').onclick=()=>{$('#q').value='';cat='All';$$('[data-f]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.f==='All'));filterP()};filterP();
+
+const events=[
+['AI, Actually: From Prompt to Prototype','2026-11-14','Workshop','Workshop','Innovation Lab','Go from a blank prompt to a working prototype in one afternoon. Bring a laptop; no AI experience needed.','var(--blue)'],
+['DevSprint: Build Night','2026-11-21','Meetup','Community meetup','Main Seminar Hall','Pick a squad, build something small, and demo it before the night ends. Snacks included.','var(--red)'],
+['Beyond the First Commit','2026-12-05','Talk','Talk & networking','Auditorium','Engineers share how they went from first commit to first job, then you get to meet them.','var(--green)']];
+const MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const fmt=d=>{const[y,m,dd]=d.split('-');return`${dd} ${MON[+m-1]} ${y}`};
+$('#evGrid').innerHTML=events.map(([t,d,k,type,v,desc,c],i)=>`<article class="card ev" data-k="${k}"><div class="date"><div class="dbox" style="--c:${c}" aria-hidden="true"><b>${d.slice(8)}</b><span>${MON[+d.slice(5,7)-1].slice(0,3)}</span></div><div><div class="meta"><time datetime="${d}">${fmt(d)}</time></div><div class="meta">${type} · ${v}</div></div></div><h3>${esc(t)}</h3><p>${esc(desc)}</p><div class="acts"><button class="btn sm" data-reg="${i}">Register</button><button class="btn ghost sm" data-more="${i}" aria-label="Learn more about ${esc(t)}">Learn more</button></div></article>`).join('');
+$$('[data-e]').forEach(b=>b.onclick=()=>{$$('[data-e]').forEach(x=>x.setAttribute('aria-pressed',x===b));$$('.ev').forEach(e=>e.hidden=b.dataset.e!=='All'&&e.dataset.k!==b.dataset.e)});
+
+/* ---------- next-event countdown ---------- */
+const start=d=>new Date(d+'T10:00:00+05:30');
+const nxt=events.find(e=>start(e[1])>new Date());
+if(nxt){$('#next').hidden=false;$('#nextTitle').textContent=nxt[0];
+ const tick=()=>{let s=Math.max(0,Math.floor((start(nxt[1])-new Date())/1000));const v=[['days',86400],['hrs',3600],['min',60],['sec',1]].map(([l,u])=>{const n=Math.floor(s/u);s%=u;return`<div><b>${String(n).padStart(2,'0')}</b><span>${l}</span></div>`});$('#cd').innerHTML=v.join('')};
+ tick();setInterval(tick,1000)}
+
+/* ---------- dialogs ---------- */
+const dlg=$('#dlg'),err=$('#err'),info=$('#info');let mode='join',evI=0;
+function openForm(m,i){mode=m;evI=i;err.textContent='';const e=events[i];
+ $('#dlgTitle').textContent=m==='join'?'Join DevSphere':'Register for event';
+ $('#dlgSub').textContent=(m==='join'?'Enter your details and we will email a 6-digit code to confirm it is you.':`${e[0]}, ${fmt(e[1])}. We will email a 6-digit code to confirm your seat.`);
+ showStep(1);dlg.showModal();$('#nm').focus()}
+function openInfo(title,html,acts){$('#infoTitle').textContent=title;$('#infoBody').innerHTML=html;const a=$('#infoActs');a.innerHTML='';
+ acts.concat([['Close','ghost',()=>{}]]).forEach(([l,cls,fn])=>{const b=document.createElement('button');b.className='btn sm '+(cls||'');b.textContent=l;b.onclick=()=>{info.close();fn()};a.appendChild(b)});info.showModal()}
+function ics(i){const e=events[i],d=e[1].replace(/-/g,'');
+ const txt=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//DevSphere//Demo//EN','BEGIN:VEVENT',`UID:${d}-${i}@devsphere.community`,`DTSTAMP:${new Date().toISOString().replace(/[-:]|\.\d{3}/g,'')}`,`DTSTART:${d}T100000`,`DTEND:${d}T130000`,`SUMMARY:${e[0]}`,`LOCATION:${e[4]}\\, Gorakhpur`,`DESCRIPTION:${e[5]}`,'END:VEVENT','END:VCALENDAR'].join('\r\n');
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/calendar'}));a.download='devsphere-event.ics';document.body.appendChild(a);a.click();a.remove();toast('Calendar file downloaded')}
+document.addEventListener('click',e=>{const j=e.target.closest('[data-join]'),r=e.target.closest('[data-reg]'),m=e.target.closest('[data-more]'),p=e.target.closest('[data-proj]');
+ if(j)openForm('join',0);if(r)openForm('event',+r.dataset.reg);
+ if(m){const i=+m.dataset.more,ev=events[i];openInfo(ev[0],`<p><time datetime="${ev[1]}">${fmt(ev[1])}</time>, 10:00 AM to 1:00 PM IST<br>${ev[3]} at ${ev[4]}, Gorakhpur</p><p>${esc(ev[5])}</p>`,[['Register','',()=>openForm('event',i)],['Add to calendar','ghost',()=>ics(i)]])}
+ if(p){const pr=projects[+p.dataset.proj];openInfo(pr[0],`<p><strong>${pr[1]}</strong></p><p>${esc(pr[4])}</p><ul class="tags">${pr[2].map(x=>`<li>${x}</li>`).join('')}</ul>`,[['Contribute','',()=>openForm('join',0)]])}});
+$('#cancel').onclick=()=>dlg.close();
+const okEmail=v=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
+/* Email verification (OTP).
+   LIVE EMAIL: fill in your EmailJS ids below (emailjs.com, free tier) to send real emails.
+   Leave empty to run in demo mode, where the code is shown on screen instead.
+   NOTE: a code generated in the browser is fine for a demo but is not real security. Verify on a server in production. */
+const MAIL={serviceId:'',templateId:'',publicKey:''};
+const live=!!(MAIL.serviceId&&MAIL.templateId&&MAIL.publicKey);
+let otpCode=null,otpExp=0,otpTries=0,who='',whoMail='',coolT=null;
+const s1=$('#s1'),s2=$('#s2');
+function showStep(n){s1.hidden=n!==1;s2.hidden=n!==2;err.textContent='';$('#err2').textContent='';if(n===2)$('#otp').focus()}
+function cooldown(sec){clearInterval(coolT);const b=$('#resend');b.disabled=true;let t=sec;
+ const f=()=>{if(t<=0){clearInterval(coolT);b.disabled=false;b.textContent='Resend code'}else{b.textContent=`Resend in ${t}s`;t--}};f();coolT=setInterval(f,1000)}
+async function sendOtp(){
+ otpCode=String(crypto.getRandomValues(new Uint32Array(1))[0]%1000000).padStart(6,'0');otpExp=Date.now()+5*60e3;otpTries=0;
+ if(live){try{const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:MAIL.serviceId,template_id:MAIL.templateId,user_id:MAIL.publicKey,template_params:{to_email:whoMail,to_name:who,otp_code:otpCode,event_name:mode==='join'?'DevSphere membership':events[evI][0]}})});if(!r.ok)throw new Error(r.status)}
+  catch(e){otpCode=null;return false}
+  $('#demoHint').textContent='Check your inbox and spam folder. The code expires in 5 minutes.'}
+ else $('#demoHint').textContent=`Demo mode: no email is sent. Your code is ${otpCode}. It expires in 5 minutes.`;
+ $('#otpMsg').textContent=live?`We sent a 6-digit code to ${whoMail}.`:`A code was generated for ${whoMail}.`;
+ return true}
+$('#ok').onclick=async()=>{const n=$('#nm').value.trim(),m=$('#em').value.trim();
+ if(!n){err.textContent='Enter your name.';$('#nm').focus();return}
+ if(!okEmail(m)){err.textContent='Enter a valid email, like you@example.com.';$('#em').focus();return}
+ who=n;whoMail=m;const b=$('#ok');b.disabled=true;b.textContent='Sending...';
+ const ok=await sendOtp();b.disabled=false;b.textContent='Send code';
+ if(!ok){err.textContent='Could not send the email. Check your connection and try again.';return}
+ $('#otp').value='';showStep(2);cooldown(30)};
+$('#resend').onclick=async()=>{const b=$('#resend');b.disabled=true;b.textContent='Sending...';
+ if(await sendOtp()){$('#otp').value='';$('#err2').textContent='';cooldown(30);toast('New code sent')}else{b.disabled=false;b.textContent='Resend code';$('#err2').textContent='Could not send the email. Try again.'}};
+$('#change').onclick=()=>{otpCode=null;showStep(1);$('#em').focus()};
+$('#verify').onclick=()=>{const e2=$('#err2'),v=$('#otp').value.trim();
+ if(!otpCode||Date.now()>otpExp){e2.textContent='This code has expired. Select Resend code to get a new one.';return}
+ if(!/^\d{6}$/.test(v)){e2.textContent='Enter the 6-digit code.';$('#otp').focus();return}
+ if(v!==otpCode){otpTries++;setTimeout(()=>sfx('err'),120);if(otpTries>=5){otpCode=null;e2.textContent='Too many wrong attempts. Select Resend code to get a new one.'}else e2.textContent=`That code is not correct. ${5-otpTries} attempts left.`;$('#otp').select();return}
+ const first=who.split(' ')[0],ev=events[evI];setTimeout(()=>sfx('win'),120);dlg.close();$('#nm').value=$('#em').value='';
+ toast(mode==='join'?`Email confirmed. Welcome to DevSphere, ${first}! (demo)`:`Email confirmed. Seat reserved for ${ev[0]} (demo)`)};
+dlg.addEventListener('close',()=>{otpCode=null;clearInterval(coolT);$('#otp').value=''});
+[dlg,info].forEach(d=>d.addEventListener('click',e=>{if(e.target===d)d.close()}));
+dlg.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.tagName==='INPUT')(s2.hidden?$('#ok'):$('#verify')).click()});
+
+/* ---------- follow form, copy email, FAQ ---------- */
+$('#follow').addEventListener('submit',e=>{e.preventDefault();const v=$('#fe').value.trim(),m=$('#fmsg');
+ if(!okEmail(v)){m.textContent='Enter a valid email, like you@example.com.';m.style.color='#ff8a80';$('#fe').focus();return}
+ m.style.color='#81c995';setTimeout(()=>sfx('win'),120);m.textContent='You are on the list. (Demo: nothing was sent.)';$('#fe').value=''});
+$('#copy').onclick=async()=>{try{await navigator.clipboard.writeText('hello@devsphere.community');toast('Email copied')}catch(e){toast('Copy failed. Email: hello@devsphere.community')}};
+$$('details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open)$$('details').forEach(o=>{if(o!==d)o.open=false})}));
+
+/* ---------- scroll: progress, back to top, active link, reveal, counters ---------- */
+const bar=$('#bar'),topBtn=$('#top');
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight||1)*100)+'%';topBtn.classList.toggle('show',h.scrollTop>700)},{passive:true});
+topBtn.onclick=()=>{scrollTo({top:0,behavior:still?'auto':'smooth'});$('.skip').focus({preventScroll:true});$('.skip').blur()};
+const links=$$('#menu a[href^="#"]');
+const io2=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)links.forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#'+en.target.id))}),{rootMargin:'-40% 0px -55% 0px'});
+['home','about','projects','events','contact'].forEach(id=>io2.observe(document.getElementById(id)));
+function count(el){const end=+el.dataset.count,suf=el.dataset.suffix||'';if(still){el.textContent=end+suf;return}
+ const t0=performance.now();(function f(t){const p=Math.min((t-t0)/1200,1);el.textContent=Math.round(end*(1-Math.pow(1-p,3)))+suf;if(p<1)requestAnimationFrame(f)})(t0)}
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(!en.isIntersecting)return;en.target.classList.add('in');$$('[data-count]',en.target).forEach(count);io.unobserve(en.target)}),{threshold:.12});
+$$('.rv').forEach(s=>io.observe(s));
+</script>
+</body>
+</html>

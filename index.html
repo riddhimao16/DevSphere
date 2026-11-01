@@ -324,9 +324,9 @@ $('#q').addEventListener('input',filterP);
 $('#reset').onclick=()=>{$('#q').value='';cat='All';$$('[data-f]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.f==='All'));filterP()};filterP();
 
 const events=[
-['AI, Actually: From Prompt to Prototype','2026-11-14','Workshop','Workshop','Innovation Lab','Go from a blank prompt to a working prototype in one afternoon. Bring a laptop; no AI experience needed.','var(--blue)'],
-['DevSprint: Build Night','2026-11-21','Meetup','Community meetup','Main Seminar Hall','Pick a squad, build something small, and demo it before the night ends. Snacks included.','var(--red)'],
-['Beyond the First Commit','2026-12-05','Talk','Talk & networking','Auditorium','Engineers share how they went from first commit to first job, then you get to meet them.','var(--green)']];
+['AI, Actually: From Prompt to Prototype','2026-11-14','Workshop','Workshop','Alan Turing Hall','Go from a blank prompt to a working prototype in one afternoon. Bring a laptop; no AI experience needed.','var(--blue)'],
+['DevSprint: Build Night','2026-11-21','Meetup','Community meetup','Aryabhatta Hall','Pick a squad, build something small, and demo it before the night ends. Snacks included.','var(--red)'],
+['Beyond the First Commit','2026-12-05','Talk','Talk & networking','Multi-Purpose Hall','Engineers share how they went from first commit to first job, then you get to meet them.','var(--green)']];
 const MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const fmt=d=>{const[y,m,dd]=d.split('-');return`${dd} ${MON[+m-1]} ${y}`};
 $('#evGrid').innerHTML=events.map(([t,d,k,type,v,desc,c],i)=>`<article class="card ev" data-k="${k}"><div class="date"><div class="dbox" style="--c:${c}" aria-hidden="true"><b>${d.slice(8)}</b><span>${MON[+d.slice(5,7)-1].slice(0,3)}</span></div><div><div class="meta"><time datetime="${d}">${fmt(d)}</time></div><div class="meta">${type} · ${v}</div></div></div><h3>${esc(t)}</h3><p>${esc(desc)}</p><div class="acts"><button class="btn sm" data-reg="${i}">Register</button><button class="btn ghost sm" data-more="${i}" aria-label="Learn more about ${esc(t)}">Learn more</button></div></article>`).join('');
